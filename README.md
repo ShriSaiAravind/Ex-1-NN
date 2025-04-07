@@ -1,5 +1,5 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>SHRI SAI ARAVIND. R</H3>
+<H3>2122230040197</H3>
 <H3>EX. NO.1</H3>
 <H3>DATE</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
@@ -37,13 +37,100 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+```py
+#import libraries
+from google.colab import files
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
 
+#Opening the file
+df = pd.read_csv("Churn_Modelling.csv")
+df.head()
+df.tail()
+df.info()
+df.columns
+
+# Finding Missing Values
+df.isnull().sum()
+
+#Check for Duplicates
+df["duplicated"] = df.duplicated()
+
+df.loc[df["duplicated"] == True]
+
+#Detect Outliers
+import matplotlib.pyplot as plt
+data = ["CreditScore", "NumOfProducts", "Balance", "Tenure", "Age"]
+fig, axes =  plt.subplots(1, 5, figsize =(15,5))
+
+for i, col in enumerate(data):
+  axes[i].boxplot(df[col])
+  axes[i].set_title(f"{col}")
+
+plt.tight_layout()
+plt.show()
+
+#Normalize the dataset
+standard = StandardScaler()
+
+cols = ['Surname','Geography','Gender','duplicated']
+df_copy = df.drop(columns = cols)
+df_copy = pd.DataFrame(standard.fit_transform(df_copy_1), columns=df_copy_1.columns)
+df_copy.head()
+
+#split the dataset into input and output
+input_df = df_copy.drop('Exited', axis = 1)
+input_df.head()
+
+output_df = df_copy['Exited']
+output_df
+
+#splitting the data for training & Testing
+x_train, x_test, y_train, y_test = train_test_split(input_df, output_df, test_size = 0.3, random_state =434)
+
+#Print the training data and testing data
+x_train
+y_train
+x_test
+y_test
+```
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+### df.head()
+![alt text](image.png)
 
+### df.tail()
+![alt text](image-1.png)
 
+### Missing values
+![alt text](image-2.png)
+
+### duplicated values 
+![alt text](image-3.png)
+
+### Outliers
+![alt text](image-4.png)
+
+### Normalizing
+![alt text](image-5.png)
+
+### Input and Output
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+### Training Values (x_train and y_train)
+![alt text](image-8.png)
+
+![alt text](image-9.png)
+
+### Testing Values (x_test and y_test)
+![alt text](image-10.png)
+
+![alt text](image-11.png)
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
 
